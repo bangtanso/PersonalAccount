@@ -14,19 +14,23 @@ public class PersonalAccount {
         this.balance = 0;
     }
 
-    public void deposit (double amount){
+    public void deposit (double amount) throws InsufficientBalanceException {
+      if (amount > 0) {
         this.balance = this.balance + amount;
         Amount a1 = new Amount(amount, "deposit");
         this.transactions.add(a1);
+      } else {
+          throw new class InsufficientBalanceException();
+        }
+      }
 
-    }
-
-    public void withdraw(double amount){
+    public void withdraw(double amount) throws InsufficientBalanceException{
         if(balance >= amount) {
             this.balance = this.balance - amount;
             Amount a1 = new Amount(amount, "withdraw");
             this.transactions.add(a1);
-        } else System.out.println("not enough");
+        } else throw new class InsufficientBalanceException();
+
     }
 
     public void printTransactionHistory(){
